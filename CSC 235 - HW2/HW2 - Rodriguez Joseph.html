@@ -1,0 +1,112 @@
+<!-- Name: Joseph Rodriguez	
+     Course: 235.01
+     HomeWork: #2
+     Git-Hub: https://github.com/htsx/Homework2
+-->	
+<!DOCTYPE html>
+
+<html>
+<head>
+<title> Yahtzee </title>
+<style type="text/css">
+<!--
+h1{text-align:center;}
+div.a{text-align:center;margin-bottom:3em;}
+table.a{margin-left:auto;margin-right:auto;}
+td.a{font-family:Arial;font-weight:bold;text-align:right;}
+td.b{background-color:#AEAFFF;border:2px inset gray;width:2em; height:1.2em;}
+td.c{width:60%;text-align:center;}
+button.a{font-family:'Times New roman';font-size:14pt;background-color:#5B00CA;color:#F7E3DC;font-weight:bold;text-align:center;}
+button.b{}
+-->
+</style>
+</head>
+
+
+<body>
+<h1> Yahtzee </h1>
+
+<script language="JavaScript">
+<!--
+
+var v = new Array(0,0,0,0,0);
+
+var h = new Array(fakse,false,false,false,false);
+
+function roll()
+{
+
+for(var i=0;i<5;i++){
+if(!h[i]){
+var d = document.getElementById("d"+i);
+v[i] = Math.floor(6*Math.random())+1; //[1,6>
+d.src="pix/dice"+v[i]+".gif";
+}
+}
+}
+function src(X)
+{
+var t = document.getElementById("s"+X)
+
+var cnt=0
+for(var=i;i<5;i++){if(v[i]==X){cnt++:}}
+t.innerHTML=X*cnt;
+}
+
+function hold(x)
+{
+
+var t = document.getElementById("d"+x);
+h[x]  = !h[x];
+if(h[x])t.src="pix/diceX"+v[x]+".gif";
+else t.src="pix/dice"+v[x]+".gif";
+
+}
+
+//-->
+</script>
+<div class = "a">
+<img id="d0" onClick="hold(0)" src="pix/dice0.gif">
+<img id="d1" onClick="hold(1)" src="pix/dice0.gif">
+<img id="d2" onClick="hold(2)" src="pix/dice0.gif">
+<img id="d3" onClick="hold(3)" src="pix/dice0.gif">
+<img id="d4" onClick="hold(4)" src="pix/dice0.gif">
+</div>
+<table class = "a">
+<tr><td class = "a"> 1's </td> 
+<td class="b" id="s1" 
+onMouseOver="src(1)"
+onMouseOut="clr(1)"></td>
+<td rowspan="5"> </td>
+<td class = "c" rowspan="5">
+<button onclick ="roll()" class = "a">Roll</button> 
+</td></tr>
+<tr><td class = "a"> 2's </td>
+<td class="b" id ="s2" 
+onMouseOver="src(2)"
+onMouseOut="clr(2)">
+</td> </tr>
+<tr> <td class = "a"> 3's </td>
+<td class="b" id ="s3"
+onMouseOver="src(3)"
+onMouseOut="clr(3)"> </td> </tr>
+<tr> <td class = "a"> 4's </td>
+<td class="b" id ="s4"
+onMouseOver="src(4)"
+onMouseOut="clr(4)"> </td> </tr>
+<tr> <td class = "a"> 5's </td>
+<td class="b" id ="s5"
+onMouseOver="src(5)"
+onMouseOut="clr(5)"> </td> </tr>
+<tr> <td class = "a"> 6's </td>
+<td class="b" id ="s6"
+onMouseOver="src(6)"
+onMouseOut="clr(6)" > </td> <td rowspan="5"> </td>
+<td class = "c" rowspan="5"> <button class = "b">New Game</button> </td> </tr>
+<tr> <td class = "a"> 3 of a Kind </td> <td class="b"> </td> </tr>
+<tr> <td class = "a"> 4 of a Kind </td> <td class="b"> </td> </tr>
+<tr> <td class = "a"> Yahtzee </td> <td class="b"> </td> </tr>
+<tr> <td class = "a"> Total </td> <td class="b"> </td> </tr>
+</table>
+</html>
+</body>
