@@ -28,40 +28,166 @@ button.b{}
 
 <script language="JavaScript">
 <!--
-
 var v = new Array(0,0,0,0,0);
-
-var h = new Array(fakse,false,false,false,false);
+var h = new Array(false,false,false,false,false);
+var rolls=0;
+var f = new Array(0,0,0,0,0,0,0);
 
 function roll()
 {
 
+rolls++;
+
+for(var i=1;i<=6;i++){f[i]=0;}
+
 for(var i=0;i<5;i++){
 if(!h[i]){
 var d = document.getElementById("d"+i);
-v[i] = Math.floor(6*Math.random())+1; //[1,6>
+v[i] = Math.floor(6*Math.random())+1; 
 d.src="pix/dice"+v[i]+".gif";
 }
+f[v[i]]++;
 }
 }
+
 function src(X)
 {
-var t = document.getElementById("s"+X)
-
-var cnt=0
-for(var=i;i<5;i++){if(v[i]==X){cnt++:}}
-t.innerHTML=X*cnt;
+var t = document.getElementById("s"+X);
+t.innerHTML = X*f[X];
 }
 
 function hold(x)
 {
-
 var t = document.getElementById("d"+x);
-h[x]  = !h[x];
+h[x]=!h[x];
 if(h[x])t.src="pix/diceX"+v[x]+".gif";
 else t.src="pix/dice"+v[x]+".gif";
-
 }
+
+function threeofakind(){
+for(let i=0; i <= 1;i++){
+let count = 1;
+for(let j = i+1; j < v.length; j++){
+if(v[i] == v[j])
+count++;
+}
+if (count == 3) 
+return three();
+else return 0;
+}
+}
+
+function fourofakind(){
+for(let i=0; i <= 1;i++){
+let count = 1;
+for(let j = i+1; j < v.length; j++){
+if(v[i] == v[j])
+count++;
+}
+if (count == 4)
+return four();
+else return 0;
+}
+}
+
+function yahtzee(){
+for(let i=0; i <= 1;i++){
+let count = 1;
+for(let j = i+1; j < v.length; j++){
+if(v[i] == v[j])
+count++;
+}
+if (v[0] == 0 && v[1] == 0 && v[2] == 0 && v[3] == 0 && v[4] == 0)
+return 0;
+else if (count == 5)
+return 50;
+else return 0;
+}
+}
+
+function total(){
+const totals = v[0]+v[1]+v[2]+v[3]+v[4];
+return totals
+}
+
+function main(X){
+document.getElementById("j"+X);
+j1.innerHTML = total()+yahtzee();
+j2.innerHTML = yahtzee();
+j3.innerHTML = threeofakind2();
+j4.innerHTML = fourofakind2();
+}
+
+function three(){
+let sum = 0;
+for (let j =0; j<v.length;j++){
+for (let k = j+1; k<v.length; k++){
+if (k != j && v[k] == v[j])
+{
+sum = v[k]+v[k]+v[k];
+return sum;
+}
+}
+}
+}
+
+function four(){
+let sum = 0;
+for (let j =0; j<v.length;j++){
+for (let k = j+1; k<v.length; k++){
+if (k != j && v[k] == v[j])
+{
+sum = v[k]+v[k]+v[k]+v[k];
+return sum;
+}
+}
+}
+}
+
+function threeofakind2(){
+if(
+//000__
+v[0] == v[1] && v[1] == v[2] && v[0] == v[2] && v[0] != v[3] && v[0] != v[4] && v[1] != v[3] && v[0] != v[4] && v[2] != v[3] && v[2] != v[4] ||
+//0_00_
+v[0] == v[2] && v[2] == v[3] && v[0] == v[3] && v[0] != v[4] && v[0] != v[1] && v[2] != v[4] && v[2] != v[1] && v[3] != v[4] && v[3] != v[1] ||
+//0__00
+v[0] == v[3] && v[3] == v[4] && v[0] == v[3] && v[0] != v[1] && v[0] != v[2] && v[3] != v[1] && v[3] != v[2] && v[4] != v[1] && v[4] != v[2] ||
+//0_0_0
+v[0] == v[2] && v[2] == v[4] && v[0] == v[4] && v[0] != v[1] && v[0] != v[3] && v[2] != v[1] && v[2] != v[3] && v[4] != v[1] && v[4] != v[3] ||
+//00__0
+v[0] == v[1] && v[1] == v[4] && v[0] == v[4] && v[0] != v[2] && v[0] != v[3] && v[1] != v[2] && v[1] != v[3] && v[4] != v[2] && v[4] != v[3] ||
+//_0_00
+v[1] == v[3] && v[3] == v[4] && v[1] == v[4] && v[1] != v[0] && v[1] != v[2] && v[3] != v[0] && v[3] != v[2] && v[4] != v[0] && v[4] != v[2] ||
+//__000
+v[2] == v[3] && v[3] == v[4] && v[2] == v[4] && v[2] != v[1] && v[2] != v[0] && v[3] != v[1] && v[3] != v[0] && v[4] != v[1] && v[4] != v[0] ||
+//_00_0
+v[1] == v[2] && v[2] == v[4] && v[1] == v[4] && v[1] != v[0] && v[1] != v[3] && v[2] != v[0] && v[2] != v[3] && v[4] != v[0] && v[4] != v[3] ||
+//_000_
+v[1] == v[2] && v[2] == v[3] && v[1] == v[3] && v[1] != v[0] && v[1] != v[4] && v[2] != v[0] && v[2] != v[4] && v[3] != v[0] && v[3] != v[4] ||
+//00_0_
+v[0] == v[1] && v[1] == v[3] && v[0] == v[3] && v[0] != v[2] && v[0] != v[4] && v[1] != v[2] && v[1] != v[4] && v[3] != v[2] && v[3] != v[4])
+return three();
+else
+return 0;
+}
+
+function fourofakind2(){
+if(
+//0000_
+v[0] == v[1] && v[0] ==  v[2] && v[0] == v[3] && v[1] == v[2] && v[1] ==  v[3] && v[2] == v[3] && v[0] != v[4] && v[1] != v[4] && v[2] != v[4] && v[3] != v[4] ||
+//000_0
+v[0] == v[1] && v[0] ==  v[2] && v[0] == v[4] && v[1] == v[2] && v[1] ==  v[4] && v[2] == v[4] && v[0] != v[3] && v[1] != v[3] && v[2] != v[3] && v[4] != v[3] ||
+//00_00
+v[0] == v[1] && v[0] ==  v[3] && v[0] == v[4] && v[1] == v[3] && v[1] ==  v[4] && v[3] == v[4] && v[0] != v[2] && v[1] != v[2] && v[3] != v[2] && v[4] != v[2] ||
+//0_000
+v[0] == v[2] && v[0] ==  v[3] && v[0] == v[4] && v[2] == v[3] && v[2] ==  v[4] && v[3] == v[4] && v[0] != v[1] && v[2] != v[1] && v[3] != v[1] && v[4] != v[1] ||
+//_0000
+v[1] == v[2] && v[1] ==  v[3] && v[1] == v[4] && v[2] == v[3] && v[2] ==  v[4] && v[3] == v[4] && v[1] != v[0] && v[2] != v[0] && v[3] != v[0] && v[4] != v[0])
+return four();
+else
+return 0;
+}
+
 
 //-->
 </script>
@@ -73,40 +199,29 @@ else t.src="pix/dice"+v[x]+".gif";
 <img id="d4" onClick="hold(4)" src="pix/dice0.gif">
 </div>
 <table class = "a">
-<tr><td class = "a"> 1's </td> 
-<td class="b" id="s1" 
-onMouseOver="src(1)"
-onMouseOut="clr(1)"></td>
-<td rowspan="5"> </td>
-<td class = "c" rowspan="5">
-<button onclick ="roll()" class = "a">Roll</button> 
-</td></tr>
-<tr><td class = "a"> 2's </td>
-<td class="b" id ="s2" 
-onMouseOver="src(2)"
-onMouseOut="clr(2)">
-</td> </tr>
-<tr> <td class = "a"> 3's </td>
-<td class="b" id ="s3"
-onMouseOver="src(3)"
-onMouseOut="clr(3)"> </td> </tr>
-<tr> <td class = "a"> 4's </td>
-<td class="b" id ="s4"
-onMouseOver="src(4)"
-onMouseOut="clr(4)"> </td> </tr>
-<tr> <td class = "a"> 5's </td>
-<td class="b" id ="s5"
-onMouseOver="src(5)"
-onMouseOut="clr(5)"> </td> </tr>
-<tr> <td class = "a"> 6's </td>
-<td class="b" id ="s6"
-onMouseOver="src(6)"
-onMouseOut="clr(6)" > </td> <td rowspan="5"> </td>
-<td class = "c" rowspan="5"> <button class = "b">New Game</button> </td> </tr>
-<tr> <td class = "a"> 3 of a Kind </td> <td class="b"> </td> </tr>
-<tr> <td class = "a"> 4 of a Kind </td> <td class="b"> </td> </tr>
-<tr> <td class = "a"> Yahtzee </td> <td class="b"> </td> </tr>
-<tr> <td class = "a"> Total </td> <td class="b"> </td> </tr>
+<tr><td class = "a"> 1's </td><td class="b" id="s1" 
+onMouseOver="src(1)" onMouseOut="clr(1)"></td><td rowspan="5"> </td><td class = "c" rowspan="5">
+<button onclick ="roll()" class = "a">Roll</button></td></tr>
+<tr><td class = "a"> 2's </td><td class="b" id="s2" onMouseOver="src(2)"
+onMouseOut="clr(2)"></td></tr>
+<tr><td class = "a"> 3's </td><td class="b" id="s3" onMouseOver="src(3)" 
+onMouseOut="clr(3)"></td></tr>
+<tr><td class = "a"> 4's </td><td class="b" id="s4" onMouseOver="src(4)"
+onMouseOut="clr(4)"></td></tr>
+<tr><td class = "a"> 5's </td><td class="b" id="s5" onMouseOver="src(5)" 
+onMouseOut="clr(5)"></td></tr>
+<tr><td class = "a"> 6's </td><td class="b" id="s6" onMouseOver="src(6)"
+onMouseOut="clr(6)"></td><td rowspan="5"> </td><td class = "c" rowspan="5">
+<button class = "b" onclick = "document.location.reload();" type = "reset" value = "New Game">New Game</button> </td> </tr>
+<tr><td class = "a"> 3 of a Kind </td><td class="b" id="j3" onMouseOver="main(3)"
+onMouseOut="clr(3)"></td></tr>
+<tr><td class = "a"> 4 of a Kind </td><td class="b" id="j4" onMouseOver="main(4)"
+onMouseOut="clr(4)"></td></tr>
+<tr><td class = "a"> Yahtzee </td><td class="b" id="j2" onMouseOver="main(2)"
+onMouseOut="clr(2)"></td></tr>
+<tr><td class = "a"> Total </td><td class="b"  id="j1" onMouseOver="main(1)" 
+onMouseOut="clr(1)"></td></tr>
+
 </table>
 </html>
 </body>
