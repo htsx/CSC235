@@ -64,32 +64,6 @@ if(h[x])t.src="pix/diceX"+v[x]+".gif";
 else t.src="pix/dice"+v[x]+".gif";
 }
 
-function threeofakind(){
-for(let i=0; i <= 1;i++){
-let count = 1;
-for(let j = i+1; j < v.length; j++){
-if(v[i] == v[j])
-count++;
-}
-if (count == 3) 
-return three();
-else return 0;
-}
-}
-
-function fourofakind(){
-for(let i=0; i <= 1;i++){
-let count = 1;
-for(let j = i+1; j < v.length; j++){
-if(v[i] == v[j])
-count++;
-}
-if (count == 4)
-return four();
-else return 0;
-}
-}
-
 function yahtzee(){
 for(let i=0; i <= 1;i++){
 let count = 1;
